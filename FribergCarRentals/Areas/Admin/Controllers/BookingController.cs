@@ -14,14 +14,14 @@ namespace FribergCarRentals.Areas.Admin.Controllers
             this.bookingRepository = bookingRepository;
         }
 
-        //GET: Admin/BookingController/AllBookings
+        //GET: Admin/Booking/AllBookings
         public ActionResult AllBookings()
         {
             return View(bookingRepository.GetAllBookings());
         }
 
 
-        //GET: Admin/BookingController/RemoveBooking/5
+        //GET: Admin/Booking/RemoveBooking/5
         public ActionResult RemoveBooking(int bookingId)
         {
             var booking = bookingRepository.GetBookingById(bookingId);
@@ -37,7 +37,7 @@ namespace FribergCarRentals.Areas.Admin.Controllers
         }
 
 
-        //POST: Admin/BookingController/RemoveBooking/5
+        //POST: Admin/Booking/RemoveBooking
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveBooking(Booking booking)

@@ -24,19 +24,19 @@ namespace FribergCarRentals.Areas.Admin.Controllers
 
 
 
-        //GET: Admin/UserController/AllUsers
+        //GET: Admin/User/AllUsers
         public ActionResult AllUsers()
         {
             return View(userRepository.GetAllUsers());
         }
 
-        //GET: Admin/UserController/AddUSer
+        //GET: Admin/User/AddUSer
         public ActionResult AddUser()
         {
             return View();
         }
         
-        //POST: Admin/UserController/AddUser
+        //POST: Admin/User/AddUser
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddUser(CreateUserViewModel userVM)
@@ -67,13 +67,13 @@ namespace FribergCarRentals.Areas.Admin.Controllers
         }
        
 
-        //GET: Admin/UserController/EditUser/5
+        //GET: Admin/User/EditUser/5
         public ActionResult EditUser(int userId)
         {
             return View(userRepository.GetUserById(userId));
         } 
 
-        //POST: Admin/UserController/EditUser/5
+        //POST: Admin/User/EditUser
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditUser(User user)
@@ -96,13 +96,13 @@ namespace FribergCarRentals.Areas.Admin.Controllers
             
         }
 
-        //GET: Admin/UserController/RemoveUser/5
+        //GET: Admin/User/RemoveUser/5
         public ActionResult RemoveUser(int userId)
         {
             return View(userRepository.GetUserById(userId));
         }
 
-        //POST: Admin/UserController/RemoveUser/5
+        //POST: Admin/User/RemoveUser
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveUser(User user)

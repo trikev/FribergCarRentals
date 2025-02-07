@@ -17,26 +17,26 @@ namespace FribergCarRentals.Areas.Admin.Controllers
         }
 
         
-        //GET: Admin/CarController/ListAllCars
+        //GET: Admin/Car/ListAllCars
         public ActionResult ListAllCars()
         {
             return View(carRepository.GetAllCars());
         }
         
         
-        //GET: Admin/CarController/CarPicture
+        //GET: Admin/Car/CarPicture
         public ActionResult CarPicture(int carId)
         {
             return View(carRepository.GetCarById(carId));
         }
 
-        //GET: Admin/CarController/AddNewCar
+        //GET: Admin/Car/AddNewCar
         public ActionResult AddNewCar()
         {
             return View();
         }
 
-        // POST: BookingController/AddNewCar
+        // POST: Admin/Car/AddNewCar
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddNewCar(Car car)
@@ -56,7 +56,7 @@ namespace FribergCarRentals.Areas.Admin.Controllers
         }
 
 
-        // GET: AdminController/RemoveCar/5
+        // GET: Admin/Car/RemoveCar/5
         public ActionResult RemoveCar(int carId)
         {
             if (bookingRepository.HasBookings(carId))
@@ -66,7 +66,7 @@ namespace FribergCarRentals.Areas.Admin.Controllers
             return View(carRepository.GetCarById(carId));
         }
 
-        // POST: AdminController/RemoveCar/5
+        // POST: Admin/Car/RemoveCar
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveCar(Car car)
@@ -83,13 +83,13 @@ namespace FribergCarRentals.Areas.Admin.Controllers
         }
         
         
-        // GET: Admin/CarController/EditCar/5
+        // GET: Admin/Car/EditCar/5
         public ActionResult EditCar(int carId)
         {
             return View(carRepository.GetCarById(carId));
         }
 
-        // POST: Admin/CarController/EditCar/5
+        // POST: Admin/Car/EditCar
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditCar(Car car)
