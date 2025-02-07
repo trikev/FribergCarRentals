@@ -1,0 +1,183 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<br />
+<div class="row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Boka <span style="color:var(--dirty-yellow)">IDAG!</span></h5>
+                <p class="card-text">
+                    Vi kan garantera att vi har en bil som passar just dig och dina behov. Oavsett om du söker en smidig stadspendlare, en rymlig familjebil eller en kraftfull SUV, har vi alternativ som matchar dina önskemål.
+                    Följ länken nedan för att utforska vårt breda utbud och hitta den bil som bäst uppfyller dina krav på komfort, prestanda och funktionalitet.
+                </p>
+                <a asp-action="ListAllCars" asp-controller="Car" class="btn mainBtn fs-3 mt-5 align-self-start">Hyr bil nu</a>
+                <div>
+                    <img src="~/images/carRentalPicnobg.png" alt="logotyp för Friberg Car Rentals" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 ">
+        <div class="card">
+            <div class=" card-body">
+                <h5 class="card-title">Om oss</h5>
+                <p class="card-text">
+                    Välkommen till Friberg Car Rentals, din pålitliga partner för biluthyrning! Sedan starten har vårt mål
+                    varit att erbjuda våra kunder en smidig och bekväm upplevelse, oavsett om du behöver en bil för en weekendresa, affärsresa eller långtidshyra.
+                </p>
+                <p>
+                    Med ett brett utbud med allt från moderna, snabba bilar till gamla klassiska 50-talare samt en kundtjänst som sätter dig i fokus, strävar vi efter att göra varje resa enkel och minnesvärd.
+                    Vi är stolta över vår flexibilitet, konkurrenskraftiga priser och personliga service som har gjort oss till ett självklart val för biluthyrning.
+                    Hos oss får du alltid trygghet på vägen – välkommen att hyra din nästa bil hos Friberg Car Rentals!
+                </p>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="ListAvailableCars" asp-controller="Car">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="d-flex gap-3">
+                        <div class="col">
+                            <label for="StartDate" class="control-label fw-bold fs-6 mb-3">Datum för att hämta upp</label>
+                            <input for="StartDate" name="StartDate" class="form-control" type="date" />
+                        </div>
+                        <div class="col">
+                            <label for="EndDate" class="control-label fw-bold fs-6 mb-3">Datum för att lämna</label>
+                            <input for="EndDate" name="EndDate" class="form-control" type="date" />
+                        </div>
+                        <br />
+                        <div class="form-group mt-3">
+                            <input type="submit" value="Se tillgänglighet" class="btn mainBtn mt-4" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body d-flex justify-content-center alignt-items-center">
+                <div class="col-sm-6">
+                    <h5 class="card-title text-center mb-4">Vanliga frågor</h5>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Boka, avboka & betalning
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>Kostar det något att avboka min hyra?</strong> <br />I vissa fall kan det tillkomma en avbokningsavgift, de flesta priser som betalas på plats har ingen avbokningsavgift. Förbetalda priser kan avbokas senast midnatt två dagar före uthämtandet av bilen, då återbetalar vi hela beloppet. Om avbokningen görs senare debiteras en administrationsavgift på SEK 300 (eller motsvarande belopp i lokal valuta), som dras från det kreditkort du använde för att göra bokningen.
+                                Vid återbetalning tar det cirka 10 bankdagar innan pengarna blir tillgängliga på ditt konto.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Försäkring och självrisk
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>Vilka försäkringar ingår i min hyra?</strong><br /> Vid bokning framgår det vilka försäkringar som ingår och vilka försäkringar som är möjliga att teckna till på plats. Information om detta finns även på den bekräftelse som sänds till dig när du bekräftar bokningen.
+                                Via www.fribergcarrentals.se specifieras vilka försäkringar som ingår.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Övrigt
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>Får jag lov att övningskörs med en hyrbil från Friberg Car Rentals?</strong> <br />Ja, att övningsköra i en hyrbil är ingen skillnad från att övningsköra med en privatbil. Vi tillåter förare som är 16 år, så länge Transportstyrelsens regler och övningskörning uppfylls. Personen som ska övningsköra måste stå som extra förare på hyresavtalet. Läs mer om regler och villkor på vår sida om körkort och övningsköra.
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer class="border-top footerNew text-muted border-3">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="mb-4">
+                    <p class="footerHeader">Bra att veta</p>
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Tanka och ladda</a>
+                        </li>
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Djur i hyrbil</a>
+                        </li>
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Trängselskatt</a>
+                        </li>
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Övningsköra i hyrbil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-3 move-item">
+                <div class="mb-4">
+                    <p class="footerHeader">Hjälp</p>
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Kundservice</a>
+                        </li>
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Begär kvitto</a>
+                        </li>
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-3 move-item">
+                <div class="mb-4">
+                    <p class="footerHeader">Övrigt</p>
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Bilbarnstolar</a>
+                        </li>
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Anpassade fordon</a>
+                        </li>
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Allmäna hyresvillkor</a>
+                        </li>
+                        <li class="footerListItem">
+                            <a asp-action="Privacy" class="footerLink">Extra förare</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</footer>

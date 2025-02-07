@@ -1,0 +1,55 @@
+﻿@model FribergCarRentals.Models.Car
+
+@{
+    ViewData["Title"] = "RemoveCar";
+}
+
+<h1>Ta bort bil</h1>
+
+
+<div>
+    <h6>Är du säker att du vill ta bort denna bilen?</h6>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductionYear)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductionYear)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxSpeed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaxSpeed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CostPerDay)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CostPerDay)
+        </dd>
+    </dl>
+    
+    <form asp-action="RemoveCar">
+        <input type="hidden" asp-for="CarId" />
+        <input type="submit" value="Ta bort" class="btn badBtn-outline" /> 
+        <a asp-action="ListAllCars" class="btn btn-secondary">Tillbaka</a>
+    </form>
+</div>
+
+<script>
+    window.onload = function(){
+        var message = '@ViewBag.AlertMessage';
+        if(message){
+            alert(message);
+            history.back();
+        }
+    };
+</script>

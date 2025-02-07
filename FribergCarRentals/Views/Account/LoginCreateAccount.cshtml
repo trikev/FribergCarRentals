@@ -1,0 +1,67 @@
+﻿
+
+<div class="row" style="text-align:center;">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card text-start">
+            <div class="card-body">
+                <h5 class="card-title">Logga in</h5>
+                <p class="card-text">Har du konto redan?</p>
+                <form asp-action="Login" method="post">
+                    <div class="form-group">
+                        <label for="Email" name="email" class="form-label">Användarnamn</label>
+                        <input name="Email" class="form-control" placeholder="Ange E-post" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Lösenord</label>
+                        <input name="Password" class="form-control" type="password" placeholder="Ange lösenord" />
+                    </div>
+                    <br />
+                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                    <button type="submit" class="btn mainBtn">Logga in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card text-start">
+            <div class="card-body">
+                <h5 class="card-title">Inget konto än?</h5>
+                <p class="card-text">Skapa konto snabbt och enkelt</p>
+                <form asp-action="CreateUserAccount" asp-controller="User" method="post">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Användarnamn</label>
+                        <input name="Username" class="form-control" placeholder="Ange användarnamn" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">E-post</label>
+                        <input name="Email" class="form-control " placeholder="Ange e-postadress" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Lösenord</label>
+                        <input name="Password" class="form-control" type="password" placeholder="Ange lösenord" />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="hidden" for="roleId" name="roleId" value="2" />
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                        <input type="submit" value="Skapa konto" class="btn mainBtn" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function(){
+        var message = '@ViewBag.FailedLogin';
+        if(message){
+            alert(message);
+            history.back();
+        }
+    };
+</script>
+
+

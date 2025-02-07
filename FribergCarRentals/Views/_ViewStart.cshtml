@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor 
+
+
+
+@{
+    var httpContext = HttpContextAccessor.HttpContext;
+    var isAuthenticated = httpContext.Session.GetString("IsAuthenticated"); //KOLLA VAD DETTA GÖR INNA DU SKICKAR IN
+    var userRole = httpContext.Session.GetString("RoleId");
+
+    if (isAuthenticated == "True")
+    {
+        if(userRole == "Admin")
+        {
+            Layout = "_AdminLayout";
+        }
+        else
+        {
+            Layout = "_UserLayout";
+        }
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+
+    
+}
+
+ 

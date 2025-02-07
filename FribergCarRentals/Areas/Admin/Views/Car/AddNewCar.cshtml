@@ -1,0 +1,53 @@
+﻿@model FribergCarRentals.Models.Car
+
+@{
+    ViewData["Title"] = "AddCar";
+}
+
+<h1>Lägg till ny bil</h1>
+
+<br/>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddNewCar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductionYear" class="control-label"></label>
+                <input asp-for="ProductionYear" class="form-control" />
+                <span asp-validation-for="ProductionYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxSpeed" class="control-label"></label>
+                <input asp-for="MaxSpeed" class="form-control" />
+                <span asp-validation-for="MaxSpeed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CostPerDay" class="control-label"></label>
+                <input asp-for="CostPerDay" class="form-control" />
+                <span asp-validation-for="CostPerDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Picture" class="control-label"></label>
+                <input asp-for="Picture" class="form-control" placeholder="Ange bildfilens namn" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Spara" class="btn mainBtn" />
+                <a asp-action="ListAllCars" class="btn btn-secondary">Tillbaka</a>
+            </div>
+        </form>
+   
+        
+    </div>
+</div>
+
+
+
+

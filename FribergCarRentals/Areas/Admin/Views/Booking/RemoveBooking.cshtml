@@ -1,0 +1,73 @@
+﻿@model FribergCarRentals.Models.Booking
+
+@{
+    ViewData["Title"] = "BookingDetails";
+}
+
+<h1>Ta bort bokning</h1>
+
+<div>
+    <br />
+    <strong>Är du säker på att du vill ta bort denna bokning?</strong>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.Model)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.Model)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.ProductionYear)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.ProductionYear)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.CostPerDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.CostPerDay)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.MaxSpeed)
+        </dt>
+        <dd class="col-sm-5">
+            @Html.DisplayFor(model => model.Car.MaxSpeed)
+        </dd>
+
+
+    </dl>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <form asp-action="RemoveBooking">
+        <input type="hidden" asp-for="BookingId" />
+        <input type="submit" value="Ta bort" class="btn badBtn-outline" />
+        <a asp-action="AllBookings" class="btn btn-secondary">Tillbaka</a>
+    </form>
+</div>
+

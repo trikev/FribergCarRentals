@@ -1,0 +1,65 @@
+﻿@model IEnumerable<FribergCarRentals.Models.Car>
+
+@{
+    ViewData["Title"] = "ListAvailableCars";
+}
+
+
+<h1>Tillgängliga bilar</h1>
+<br />
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+
+        <div class="col-sm-3 mb-3 mb-sm-3">
+            <div class="card" style="width: 18rem;">
+                <a asp-action="CarPicture" asp-route-carId="@item.CarId"><img src="/images/@item.Picture" class="card-img-top" alt="bild på vald bil"></a>
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Model)</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="model-row">
+                            <span style="font-weight:bold;">@Html.DisplayNameFor(model => model.ProductionYear)</span>
+                            <span>@Html.DisplayFor(modelItem => item.ProductionYear)</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="model-row">
+                            <span style="font-weight:bold;">@Html.DisplayNameFor(model => model.MaxSpeed)</span>
+                            <span>@Html.DisplayFor(modelItem => item.MaxSpeed)</span>
+
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="model-row mb-0">
+                            <span style="font-weight:bold;">@Html.DisplayNameFor(model => model.CostPerDay)</span>
+                            <span>@Html.DisplayFor(modelItem => item.CostPerDay)</span>
+                        </div>
+                    </li>
+                </ul>
+                <form asp-action="ConfirmBooking" asp-controller="Booking">
+                    <div class="card-body text-center">
+                        <input type="hidden" name="endDate" for="EndDate" value="@ViewBag.EndDate" />
+                        <input type="hidden" name="startDate" for="StartDate" value="@ViewBag.StartDate" />
+                        <input type="hidden" name="carId" asp-for="@item.CarId" />
+                        <button type="submit" class="btn mainBtn">Hyr bil nu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    }
+</div>
+<script>
+    window.onload = function(){
+        var message = '@ViewBag.AlertMessage';
+        if(message){
+            alert(message);
+            history.back();
+        }
+    };
+</script>

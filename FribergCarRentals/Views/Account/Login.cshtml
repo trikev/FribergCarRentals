@@ -1,0 +1,35 @@
+﻿@model FribergCarRentals.ViewModels.LoginViewModel
+
+<h2>Logga in</h2>
+
+<br />
+<div class="card" style="width: 15em;">
+    <div class="card-body">
+        <h5 class="card-title">Logga in</h5>
+        <form asp-action="Login">
+            <div class="mb-3">
+                <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" id="email" placeholder="Ange e-post" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" id="password" class="form-control" placeholder="Ange lösenord" />
+            </div>
+            <button type="submit" class="btn mainBtn">Logga in</button>
+        </form>
+        
+        <p style="margin-bottom: 0; margin-top: 1rem;">Ingen konto? </p>
+        <a asp-action="CreateUserAccount" asp-controller="User" class="a-link">Skapa ett konto kostnadsfritt</a>
+    </div>
+</div>
+<script>
+    window.onload = function(){
+        var message = '@ViewBag.FailedLogin';
+        if(message){
+            alert(message);
+            history.back();
+        }
+    };
+</script>
+

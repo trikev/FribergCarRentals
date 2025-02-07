@@ -1,0 +1,44 @@
+﻿@model FribergCarRentals.Models.Booking
+
+@{
+    ViewData["Title"] = "BookingDetails";
+}
+<div class="card text-center">
+    <div class="card-header">
+        <h5 class="card-title">Bokningsbekräftelse</h5>
+    </div>
+    <div class="card-body">
+        
+        <dl class="row align-items-center justify-content-center">
+            <dt class="col-6 text-end">
+                @Html.DisplayNameFor(model => model.User.UserName)
+            </dt>
+            <dd class="col-6 text-start">
+                @Html.DisplayFor(model => model.User.UserName)
+            </dd>
+            <dt class="col-6 text-end">
+                @Html.DisplayNameFor(model => model.Car.Model)
+            </dt>
+            <dd class="col-6 text-start">
+                @Html.DisplayFor(model => model.Car.Model)
+            </dd>
+            <dt class="col-6 text-end">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-6 text-start">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-6 text-end">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-6 text-start">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+        </dl>
+        <a asp-action="MyBookings" class="btn mainBtn">Mina bokningar</a>
+    </div>
+    <div class="card-footer text-body-secondary pt-rem-1">
+        <h5 >Tack för att du bokar din bil hos oss på <br /><img src="~/favicon/favicon-96x96.png" /></h5>
+    </div>
+</div>
+

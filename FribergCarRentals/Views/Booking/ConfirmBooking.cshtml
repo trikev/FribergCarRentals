@@ -1,0 +1,62 @@
+﻿@model FribergCarRentals.ViewModels.CarBookingViewModel
+@{
+    ViewData["Title"] = "ConfirmBooking";
+}
+
+<h1>Stämmer bokningen?</h1>
+
+<div>
+    <br />
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.Model)
+        </dt>
+        <dd class="col-sm-10">
+            <span style="color: var(--orange)">@Html.DisplayFor(model => model.Car.Model)</span>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.ProductionYear)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.ProductionYear)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.CostPerDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.CostPerDay)
+        </dd>
+
+
+
+    </dl>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingVM.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingVM.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingVM.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingVM.EndDate)
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <form asp-action="CreateBooking" asp-controller="Booking" method="post">
+        <input type="hidden" name="endDate" asp-for="@Model.BookingVM.EndDate" />
+        <input type="hidden" name="startDate" asp-for="@Model.BookingVM.StartDate" />
+        <input type="hidden" name="carId" asp-for="@Model.Car.CarId" />
+        <button type="submit" class="btn mainBtn">Boka</button>
+        <a asp-action="AvailableCarCheck" asp-controller="Car" class="btn btn-secondary">Tillbaka</a>
+    </form>
+</div>
+

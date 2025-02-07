@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FribergCarRentals.Models.Car>
+
+@{
+    ViewData["Title"] = "ListAllCars";
+}
+
+
+<h1>Bilar att hyra</h1>
+
+<a asp-action="CreateBooking" asp-controller="Booking" class="btn mainBtn">Se tillgänglighet</a>
+<br />
+<br />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3 mb-3 mb-sm-3">
+            <div class="card" style="width: 18rem;">
+                <a asp-action="CarPicture" asp-route-carId="@item.CarId"><img src="/images/@item.Picture" class="card-img-top" alt="bild på vald bil"></a>
+
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Model)</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="model-row">
+                            <span style="font-weight:bold;">@Html.DisplayNameFor(model => model.ProductionYear)</span>
+                            <span>@Html.DisplayFor(modelItem => item.ProductionYear)</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="model-row">
+                            <span style="font-weight:bold;">@Html.DisplayNameFor(model => model.MaxSpeed)</span>
+                            <span>@Html.DisplayFor(modelItem => item.MaxSpeed)</span>
+
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="model-row mb-0">
+                            <span style="font-weight:bold;">@Html.DisplayNameFor(model => model.CostPerDay)</span>
+                            <span>@Html.DisplayFor(modelItem => item.CostPerDay)</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    window.onload = function(){
+        var message = '@ViewBag.AlertMessage';
+        if(message){
+            alert(message);
+            history.back();
+        }
+    };
+</script>
+

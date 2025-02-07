@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FribergCarRentals.Models.User>
+
+@{
+    ViewData["Title"] = "AllUsers";
+}
+
+<h1>Användare</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                    <span class="a-link">@Html.DisplayFor(modelItem => item.Email)</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.RoleName)
+            </td>
+            <td>
+                <input type="hidden" asp-for="@item.Password"/>
+                    <a asp-action="Removeuser" asp-route-UserId="@item.UserId"><i class="fa-solid fa-trash symbol"></i></a> |
+                    <a asp-action="EditUser" asp-route-UserId="@item.UserId"><i class="fa-regular fa-pen-to-square symbol"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a asp-action="AddUser" class="btn mainBtn">Skapa ny användare</a>
+</p>

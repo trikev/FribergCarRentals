@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FribergCarRentals.Models.Car>
+
+@{
+    
+    ViewData["Title"] = "ListAllCars";
+}
+
+
+<h1>Dina bilar</h1>
+
+<a asp-action="AddNewCar" class="btn mainBtn">Lägg till bil</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductionYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostPerDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+            <td >
+                @Html.DisplayFor(modelItem => item.ProductionYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxSpeed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostPerDay)
+            </td>
+            <td>
+                    <a class="btn mainBtn" asp-action="CarPicture" asp-area="Admin" asp-route-carId="@item.CarId">Bild</a>
+            </td>
+            <td>
+                    <a asp-action="EditCar" asp-route-CarId="@item.CarId"><i class="fa-regular fa-pen-to-square symbol"></i></a> |
+                    <a asp-action="RemoveCar" asp-route-CarId="@item.CarId"><i class="fa-solid fa-trash symbol"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

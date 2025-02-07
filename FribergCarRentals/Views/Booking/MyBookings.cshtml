@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FribergCarRentals.Models.Booking>
+
+@{
+    ViewData["Title"] = "MyBookings";
+}
+
+<h1>Kommande bokningar</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car.Model)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Model)
+                </td>
+                <td>
+
+                    <a asp-action="EditBooking" asp-route-bookingId="@item.BookingId"><i class="fa-regular fa-pen-to-square symbol"></i></a> |
+                    <a asp-action="BookingDetails" asp-route-bookingId="@item.BookingId"><i class="fa-solid fa-circle-info symbol"></i></a> |
+                    <a asp-action="RemoveBooking" asp-route-bookingId="@item.BookingId"><i class="fa-solid fa-trash symbol"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="btn mainBtn" asp-action="OldBookings" asp-controller="Booking">Tidigare bokningar</a>

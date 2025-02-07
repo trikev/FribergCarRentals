@@ -1,0 +1,51 @@
+﻿@model FribergCarRentals.ViewModels.CreateUserViewModel
+
+@{
+    ViewData["Title"] = "CreateUserAccount";
+}
+
+<h1>Skapa konto</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateUserAccount">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">Användarnamn*</label>
+                <input asp-for="UserName" class="form-control mb-3" placeholder="Ange användarnamn" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">E-Postadress*</label>
+                <input asp-for="Email" type="email" class="form-control mb-3" placeholder="Ange e-post" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Lösenord*</label>
+                <input asp-for="Password" type="password" id="password" class="form-control mb-3" placeholder="Ange lösenord" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="hidden" asp-for="RoleId" value="2"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skapa konto" class="btn mainBtn" />
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    window.onload = function(){
+        var message = '@ViewBag.AlreadyExists';
+        if(message){
+            alert(message);
+            history.back();
+        }
+    };
+</script>
+
+
+
