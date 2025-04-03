@@ -1,4 +1,5 @@
 using FribergCarRentals.Models;
+using FribergCarRentals.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -10,6 +11,7 @@ namespace FribergCarRentals.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -19,6 +21,7 @@ namespace FribergCarRentals.Controllers
         //GET: Home/Index
         public IActionResult Index()
         {
+            
             return View();
         }
 

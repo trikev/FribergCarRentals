@@ -1,4 +1,5 @@
 using FribergCarRentals.Data;
+using FribergCarRentals.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace FribergCarRentals
@@ -28,6 +29,16 @@ namespace FribergCarRentals
             builder.Services.AddTransient<IBooking, BookingRepository>();
             builder.Services.AddTransient<IRole, RoleRepository>();
 
+            /*TEST API*/
+            builder.Services.AddHttpClient<ApiService>();
+
+            builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -45,6 +56,8 @@ namespace FribergCarRentals
 
             app.UseAuthorization();
             app.UseSession();
+
+            app.MapControllers();
 
             app.MapControllerRoute(
                 name: "areas",

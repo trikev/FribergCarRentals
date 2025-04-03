@@ -1,6 +1,8 @@
 ﻿using FribergCarRentals.Data;
 using FribergCarRentals.Models;
+using FribergCarRentals.Services;
 using FribergCarRentals.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FribergCarRentals.Controllers
@@ -10,21 +12,23 @@ namespace FribergCarRentals.Controllers
         private readonly IUser userRepository;
         private readonly IBooking bookingRepository;
         private readonly ICar carRepository;
+        private readonly ApiService apiService;
 
 
 
-        public BookingController(IUser userRepository, IBooking bookingRepository, ICar carRepository)
+        public BookingController(IUser userRepository, IBooking bookingRepository, ICar carRepository, ApiService apiService)
         {
             this.userRepository = userRepository;
             this.bookingRepository = bookingRepository;
             this.carRepository = carRepository;
+            this.apiService = apiService;
         }
 
 
-        //GET: Booking/ConfirmBooking/5
+        //GET: Booking/ConfirmBooking
         public ActionResult ConfirmBooking(CreateBookingViewModel createBookingVM)
         {
-            
+
             var userId = HttpContext.Session.GetString("UserId");
             if (userId == null)
             {
@@ -40,8 +44,8 @@ namespace FribergCarRentals.Controllers
 
             return View(carBookingViewModel);
         }
-        
-        
+
+
         //GET: Booking/CreateBooking/5
         public ActionResult CreateBooking(int carId)
         {
@@ -51,7 +55,7 @@ namespace FribergCarRentals.Controllers
         //POST: Booking/CreateBooking
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateBooking(CreateBookingViewModel createBookingVM) 
+        public ActionResult CreateBooking(CreateBookingViewModel createBookingVM)
         {
             try
             {
@@ -83,7 +87,7 @@ namespace FribergCarRentals.Controllers
             }
         }
 
-      
+
         //GET: Booking/BookingConfirmation/5
         public ActionResult BookingConfirmation(int bookingId)
         {
@@ -97,14 +101,21 @@ namespace FribergCarRentals.Controllers
 
 
         //GET: Booking/MyBookings
-        public ActionResult MyBookings()
+        [HttpGet]
+        public async Task<ActionResult> MyBookings()
         {
+
             var userId = HttpContext.Session.GetString("UserId");
             if (userId == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-            return View(bookingRepository.GetAllBookingsById(int.Parse(userId)).Where(b => b.EndDate > DateTime.Now));           
+
+
+            var bookings = await apiService.Get<IEnumerable<Booking>>($"Booking/Get/{int.Parse(userId)}");
+            return View(bookings);
+
+
         }
 
         //GET: Booking/OldBookings
@@ -117,9 +128,9 @@ namespace FribergCarRentals.Controllers
 
 
         //GET: Booking/RemoveBooking/5
-        public ActionResult RemoveBooking(int bookingId)
+        public async Task<ActionResult> RemoveBooking(int bookingId)
         {
-            var booking = bookingRepository.GetBookingById(bookingId);
+            var booking = await apiService.Get<Booking>($"Booking/BookingDetails/{bookingId}");
 
             if (booking == null)
             {
@@ -131,11 +142,11 @@ namespace FribergCarRentals.Controllers
         //POST: Booking/RemoveBooking/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoveBooking(Booking booking)
+        public async Task<ActionResult> RemoveBookingAgain(int bookingId)
         {
             try
             {
-                bookingRepository.Delete(booking);
+                await apiService.Delete($"Booking/Delete/{bookingId}");          
                 return RedirectToAction("MyBookings");
             }
             catch
@@ -145,56 +156,35 @@ namespace FribergCarRentals.Controllers
         }
 
         // GET: Booking/EditBooking/5
-        public ActionResult EditBooking(int bookingId)
+        public async Task<ActionResult> EditBooking(int bookingId)
         {
-            var booking = bookingRepository.GetBookingById(bookingId);
+            var booking = await apiService.Get<Booking>($"Booking/BookingDetails/{bookingId}");
 
             if (booking == null)
             {
                 return RedirectToAction("Index", "Home");
             }
+
             return View(booking);
 
-        }  
+        }
 
         // POST: Booking/EditBooking/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditBooking(UserBookingViewModel userBookingVM)
+        public async Task<ActionResult> EditBooking(UserBookingViewModel userBookingVM)
         {
-            try
-            {
-                var booking = bookingRepository.GetBookingById(userBookingVM.BookingId);
-
-                var bookings = bookingRepository.GetAllBookings()
-                    .Where(c => c.StartDate < userBookingVM.EndDate && c.EndDate > userBookingVM.StartDate)
-                    .ToList();
-
-                if (ModelState.IsValid)
-                {
-                    if (bookings.Any())
-                    {
-                        ViewBag.AlertMessage = "Bilen är redan bokad under vald period. Försök att ändra igen.";
-                        return View(booking);
-                    }
-                    booking.StartDate = userBookingVM.StartDate;
-                    booking.EndDate = userBookingVM.EndDate;
-                    
-                    bookingRepository.Update(booking);
-                }
-                return RedirectToAction("MyBookings");
-            }
-            catch
-            {
-
-                return View();
-            }
+            await apiService.Put<UserBookingViewModel>($"Booking/Put", userBookingVM);
+            return RedirectToAction("MyBookings");
         }
 
         //GET: Booking/CarDetails/5
-        public ActionResult BookingDetails(int bookingId)
+        [HttpGet]
+        public async Task<ActionResult> BookingDetails(int bookingId)
         {
-            return View(bookingRepository.GetBookingById(bookingId));
+            var booking = await apiService.Get<Booking>($"Booking/BookingDetails/{bookingId}");
+            return View(booking);
+
         }
     }
 }
